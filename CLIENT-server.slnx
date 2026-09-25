@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="CLIENT-server/CLIENT-server.csproj" />
   <Project Path="threats server/threats server.csproj" Id="e5265e3b-8ed5-4774-ae4a-7e1eada96dba" />
+  <Project Path="WinFormsApp1 - Forside/WinFormsApp1 - Forside.csproj" Id="b20e5077-e211-4ff2-afde-c0eaec6b8aa2" />
 </Solution>
