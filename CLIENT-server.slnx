@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CLIENT-server/CLIENT-server.csproj" />
+  <Project Path="threats server/threats server.csproj" Id="e5265e3b-8ed5-4774-ae4a-7e1eada96dba" />
+</Solution>
