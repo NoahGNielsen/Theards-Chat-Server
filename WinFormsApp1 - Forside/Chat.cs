@@ -14,5 +14,20 @@ namespace WinFormsApp1___Forside
         {
             InitializeComponent();
         }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxBesked_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxChat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
