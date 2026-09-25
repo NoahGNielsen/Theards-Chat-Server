@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             buttonSend = new Button();
-            label1 = new Label();
+            labelForum = new Label();
             listBoxChat = new ListBox();
             textBoxBesked = new TextBox();
             SuspendLayout();
@@ -44,14 +44,14 @@
             buttonSend.UseVisualStyleBackColor = true;
             buttonSend.Click += buttonSend_Click;
             // 
-            // label1
+            // labelForum
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(386, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 20);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
+            labelForum.AutoSize = true;
+            labelForum.Location = new Point(386, 9);
+            labelForum.Name = "labelForum";
+            labelForum.Size = new Size(51, 20);
+            labelForum.TabIndex = 1;
+            labelForum.Text = "Forum";
             // 
             // listBoxChat
             // 
@@ -77,7 +77,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(textBoxBesked);
             Controls.Add(listBoxChat);
-            Controls.Add(label1);
+            Controls.Add(labelForum);
             Controls.Add(buttonSend);
             Name = "Chat";
             Text = "Form1";
@@ -88,7 +88,7 @@
         #endregion
 
         private Button buttonSend;
-        private Label label1;
+        private Label labelForum;
         private ListBox listBoxChat;
         private TextBox textBoxBesked;
     }
