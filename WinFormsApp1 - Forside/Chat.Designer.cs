@@ -72,6 +72,7 @@
             // 
             // Chat
             // 
+            AcceptButton = buttonSend;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
@@ -80,7 +81,7 @@
             Controls.Add(labelForum);
             Controls.Add(buttonSend);
             Name = "Chat";
-            Text = "Form1";
+            Text = "Chat";
             ResumeLayout(false);
             PerformLayout();
         }
