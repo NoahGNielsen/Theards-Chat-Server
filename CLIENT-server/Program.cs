@@ -24,7 +24,7 @@ class ProgramClient
                 NetworkStream stream = client.GetStream();
 
                 // Prepare a message to send to the server
-                string message = "Hello, Server!" + Console.ReadLine();
+                string message = "" + Console.ReadLine();
                 byte[] data = Encoding.UTF8.GetBytes(message);
 
                 // Send the message to the server
