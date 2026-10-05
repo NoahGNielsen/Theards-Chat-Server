@@ -17,12 +17,7 @@ namespace WinFormsApp1___Forside
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(textBoxBesked.Text))
-            {
-                string besked = textBoxBesked.Text;
-                listBoxChat.Items.Add($"You: {besked}");
-                textBoxBesked.Clear();
-            }
+            
         }
 
         private void textBoxBesked_TextChanged(object sender, EventArgs e)
