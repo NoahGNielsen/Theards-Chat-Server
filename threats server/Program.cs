@@ -12,10 +12,10 @@ class BroadcastServerThreaded
 
     static void Main()
     {
-        string serverIP = "127.0.0.1";
+        IPAddress serverIP = IPAddress.Any;
         int port = 5000;
 
-        TcpListener server = new TcpListener(IPAddress.Parse(serverIP), port);
+        TcpListener server = new TcpListener(serverIP, port);
         server.Start();
         Console.WriteLine($"[Server] : Server started on {serverIP}:{port}");
 
