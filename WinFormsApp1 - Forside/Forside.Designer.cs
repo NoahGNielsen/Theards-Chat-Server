@@ -50,6 +50,7 @@
             // 
             textBoxIP.Location = new Point(100, 31);
             textBoxIP.Name = "textBoxIP";
+            textBoxIP.PlaceholderText = "127.0.0.1";
             textBoxIP.Size = new Size(200, 39);
             textBoxIP.TabIndex = 1;
             // 
@@ -61,6 +62,7 @@
             buttonForbindIP.TabIndex = 2;
             buttonForbindIP.Text = "Forbind";
             buttonForbindIP.UseVisualStyleBackColor = true;
+            buttonForbindIP.Click += buttonForbindIP_Click;
             // 
             // labelIngenServer
             // 
@@ -93,6 +95,7 @@
             // 
             // Forside
             // 
+            AcceptButton = buttonForbindIP;
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(867, 392);
