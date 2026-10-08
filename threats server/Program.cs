@@ -13,31 +13,31 @@ class BroadcastServerThreaded
     static void Main()
     {
         IPAddress serverIP = IPAddress.Any;
-        int port = 5000;
 
-        TcpListener server = new TcpListener(serverIP, port);
+        TcpListener server = new TcpListener(serverIP, 5000);
         server.Start();
-        Console.WriteLine($"[Server] : Server started on {serverIP}:{port}");
+        Console.WriteLine($"Server ip {serverIP}:{5000}");
 
         while (true)
         {
             try
             {
                 TcpClient client = server.AcceptTcpClient();
-                Console.WriteLine($"[Client] : Client connected.");
+                Console.WriteLine($"Clint connected.");
 
                 lock (lockObject)
                 {
                     clients.Add(client);
                 }
 
+                //starts a new thread for each client, to avoid DOS
                 Thread t = new Thread(() => HandleClient(client));
                 t.IsBackground = true;
                 t.Start();
             }
             catch (Exception e)
             {
-                Console.WriteLine($"[Error] : Error: {e.Message}");
+                Console.WriteLine($"Error: {e.Message}");
             }
         }
     }
@@ -50,7 +50,7 @@ class BroadcastServerThreaded
             byte[] buffer = new byte[1024];
             int bytesRead;
 
-            // This loop keeps running as long as the client stays connected - it does NOT disconnect after each message
+            // This loop keeps running as long as the client stays connected
             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
@@ -58,17 +58,11 @@ class BroadcastServerThreaded
 
                 BroadcastMessage(message);
             }
-            // bytesRead == 0 means the client closed the connection gracefully
         }
         catch (Exception ex)
         {
-            // E.g. if the client closes the connection abruptly (connection reset)
+            //If theres an error, it will be caught here, and the client will be removed from the list
             Console.WriteLine($"[Error] : Error in client thread: {ex.Message}");
-        }
-        finally
-        {
-            // Regardless of why the loop stopped: remove the client from the list and close the socket.
-            // The thread then ends automatically, since the method returns.
             RemoveClient(client);
         }
     }
@@ -83,7 +77,7 @@ class BroadcastServerThreaded
 
         if (wasRemoved)
         {
-            try { client.Close(); } catch { /* already closed */ }
+            try { client.Close(); } catch {}
             Console.WriteLine($"[Client] : Connection closed. Active clients: {clients.Count}");
         }
     }
@@ -94,8 +88,7 @@ class BroadcastServerThreaded
         List<TcpClient> copy;
         List<TcpClient> dead = new List<TcpClient>();
 
-        // Take a copy so we don't hold the lock while writing to sockets (avoids blocking the Accept loop)
-        lock (lockObject)
+        lock (lockObject) // Copy the list of clients to avoid DOS
         {
             copy = new List<TcpClient>(clients);
         }
@@ -109,17 +102,17 @@ class BroadcastServerThreaded
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[Error] : Could not send to a client: {ex.Message}");
-                dead.Add(receiver); // The client is no longer responding - clean up right away
+                Console.WriteLine($"Could not send to a client: {ex.Message}");
+                dead.Add(receiver);
             }
         }
 
-        // Remove dead clients now, instead of waiting for their own thread to detect it
+        // If a client is dead, remove it from the list of clients
         foreach (TcpClient d in dead)
         {
             RemoveClient(d);
         }
 
-        Console.WriteLine($"[Server] : Message broadcasted to {copy.Count - dead.Count} client(s).");
+        Console.WriteLine($"Message broadcasted to {copy.Count - dead.Count} clients.");
     }
 }
